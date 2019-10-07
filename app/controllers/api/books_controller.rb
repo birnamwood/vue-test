@@ -29,6 +29,15 @@ class Api::BooksController < ApplicationController
     end
   end
 
+  def destroy
+    @book = Book.find(params[:id])
+    if @book.destroy
+      head :no_content
+    else
+      render json: @book.errors, status: :unprocessable_entity
+    end
+  end
+
 
   private
 
